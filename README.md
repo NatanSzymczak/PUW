@@ -9,7 +9,7 @@ Zmodyfikowane zadanie, popraw błędy  na komputerze , komentarz na zaliczenia  
 Dla zaliczenia przedmiotu, do każdego zadania trzeba dodać graficzny algorytm działania programu ,
 Objaśnić program i jego działanie na zaliczeniu.
 
-Zad_1 = 6.1
-Zad_2 = 6.2
-Zad_3 = 6.3
-Zad_4 = 6.4
+Zad_1 = 6.1 ;
+Zad_2 = 6.2 ;
+Zad_3 = 6.3 ;
+Zad_4 = 6.4 ;
