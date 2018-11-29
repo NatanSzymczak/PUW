@@ -1,5 +1,5 @@
 /***************************************************************
- * Name:      Zad_1 (6.1)
+ * Name:      Zad_1 (6.2)
  * File:      main.cpp
  * Purpose:   Code for school
  * Author:    Damian Michalak-Szmacińśki ()
@@ -51,8 +51,8 @@ float Trojmian::przetworz_dane()
 {
     delta = b*b-(4*a*c);
 
-    if (delta < 0)  liczba_pierwiastkow = '0';
-    if (delta > 0)  liczba_pierwiastkow = '2';
+    if (delta <  0)  liczba_pierwiastkow = '0';
+    if (delta >  0)  liczba_pierwiastkow = '2';
     if (delta == 0) liczba_pierwiastkow = '1';
 
     switch(liczba_pierwiastkow)
@@ -62,6 +62,7 @@ float Trojmian::przetworz_dane()
         break;
     case '2':
         x1 = (-b-sqrt(delta))/(2*a);
+        x2 = (-b+sqrt(delta))/(2*a);
         break;
     }
 }
