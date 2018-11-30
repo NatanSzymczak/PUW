@@ -1,5 +1,5 @@
 /***************************************************************
- * Name:      Zad_1 (6.1)
+ * Name:      Zad_1 (6.1) _Przerobione_Ver1
  * File:      main.cpp
  * Purpose:   Code for school
  * Author:    Damian Michalak-Szmacińśki ()
@@ -14,46 +14,144 @@
 
 using namespace std;
 
-class Pole_prostokata{
+class Pole_czworokata{
 public:
-    float a, b, pole;
+    float a, b, h, pole;
 
-    void czytaj_dane();
-    float przetworz_dane();
-    void wyswietl_wynik();
+    virtual void czytaj_dane()=0;
+    virtual float przetworz_dane()=0;
+    virtual void wyswietl_wynik()=0;
 };
 
-void Pole_prostokata::czytaj_dane()
-{
-    cout << "Program oblicza pole prostokąta" << endl;
-    cout << "Podaj bok a: ";
-    cin  >> a;
-    cout << "Podaj bok b: ";
-    cin  >> b;
-}
+class Kwadrat : public Pole_czworokata{
 
-float Pole_prostokata::przetworz_dane()
-{
-    pole = a*b;
-}
+    void czytaj_dane()
+    {
+        cout << "Program oblicza pole kwadratu" << endl;
+        cout << "Podaj bok a: ";
+        cin  >> a;
+    }
 
-void Pole_prostokata::wyswietl_wynik()
-{
-    cout << "Pole prostokąta o boku a = " << endl;
-    cout << fixed;
-    cout << setprecision(2);
-    cout << a << "i o boku b = " << endl;
-    cout << " wynosi " << pole << "." <<endl;
-}
+    float przetworz_dane()
+    {
+        pole = a*a;
+    }
 
+    void wyswietl_wynik()
+    {
+        cout << fixed;
+        cout << setprecision(2);
+        cout << "------------------------------" << endl;
+        cout << "Pole kwadratu o boku a = " << a << endl;
+        cout << "Wynosi " << pole << "." <<endl;
+    }
+
+};
+
+class Prostokat : public Pole_czworokata{
+
+    void czytaj_dane()
+    {
+        cout << "Program oblicza pole prostokąta" << endl;
+        cout << "Podaj bok a: ";
+        cin  >> a;
+        cout << "Podaj bok b: ";
+        cin  >> b;
+    }
+
+    float przetworz_dane()
+    {
+        pole = a*b;
+    }
+
+    void wyswietl_wynik()
+    {
+        cout << fixed;
+        cout << setprecision(2);
+        cout << "------------------------------" << endl;
+        cout << "Pole kwadratu o boku a = " << a << endl;
+        cout << "i o boku b = " << b << endl;
+        cout << "Wynosi " << pole << "." <<endl;
+    }
+
+};
+
+class Trapez : public Pole_czworokata{
+
+    void czytaj_dane()
+    {
+        cout << "Program oblicza pole trapezu" << endl;
+        cout << "Podaj podstawe a: ";
+        cin  >> a;
+        cout << "Podaj podstawe b: ";
+        cin  >> b;
+        cout << "Podaj wyskosc h: ";
+        cin  >> h;
+    }
+
+    float przetworz_dane()
+    {
+        pole = (a+b)*h*0.5; // Srpawdzic poprawnosc wzoru
+    }
+
+    void wyswietl_wynik()
+    {
+        cout << fixed;
+        cout << setprecision(2);
+        cout << "------------------------------" << endl;
+        cout << "Pole Trapezu o podstawie a = " << endl;
+        cout << a << "i o postawie b = " << b << endl;
+        cout << a << "oraz o wyskosci h = " << h << endl;
+        cout << "Wynosi " << pole << "." <<endl;
+    }
+
+};
+
+void oblicz_pole_dla_czworokata()
+{
+    char wybor = ' ';
+
+    cout << "Wybierz dla jakiej figury chcesz obliczyc pole:" << endl;
+    cout << "Kwadrat    1" << endl;
+    cout << "Prostokat  2" << endl;
+    cout << "Trapez     3" << endl;
+    cout << "Twoj wybor (domyslnie kwadrat): ";
+    cin  >> wybor;
+
+    Kwadrat             kwadrat;
+    Prostokat           prostokat;
+    Trapez              trapez;
+    Pole_czworokata    *wsk_pole = 0;
+
+    switch (wybor)
+    {
+        case '1':
+            wsk_pole = &kwadrat;
+        break;
+
+        case '2':
+            wsk_pole = &prostokat;
+        break;
+
+        case '3':
+            wsk_pole = &trapez;
+        break;
+
+        default:
+            cout << "Niedokonano wlasciwego wyboru obliczam domyslnie" << endl;
+            wsk_pole = &kwadrat;
+        break;
+    }
+
+    wsk_pole->czytaj_dane();
+    wsk_pole->przetworz_dane();
+    wsk_pole->wyswietl_wynik();
+
+}
 
 int main()
 {
-    Pole_prostokata pole;
-
-    pole.czytaj_dane();
-    pole.przetworz_dane();
-    pole.wyswietl_wynik();
+    oblicz_pole_dla_czworokata();
 
     getchar(); // getch();
     return 0;

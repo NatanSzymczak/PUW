@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1543497984 source:/home/damian/Programowanie/Szkola/PUW/Zad_2/main.cpp
-	<iostream>
-	<iomanip>
-	<curses.h>
-	<math.h>
-
