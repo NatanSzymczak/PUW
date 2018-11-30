@@ -17,11 +17,14 @@ using namespace std;
 
 class Trojmian{
 public:
-    float a, b,c , delta, x1, x2;
-    char liczba_pierwiastkow;
+    float a, b,c , delta, x1, x2, wartX, wartFunc;
+    char liczba_pierwiastkow, wybor;
 
     void czytaj_dane();
-    float przetworz_dane();
+    void przetworz_dane();
+    void wyz_pierwiastki();
+    void wyz_delte();
+    void wyz_wartosc();
     void wyswietl_wynik();
 };
 
@@ -45,11 +48,28 @@ void Trojmian::czytaj_dane()
         cout << "Podaj c: ";
         cin  >> c;
     }
+
+    cout << setprecision(1) << "Twoja funkcja: " << "f(x)= ";
+    cout <<  a << "x^2 + ";
+    cout << b << "x + " << c << endl;
 }
 
-float Trojmian::przetworz_dane()
+void Trojmian::wyz_delte()
 {
     delta = b*b-(4*a*c);
+}
+
+void Trojmian::wyz_wartosc()
+{
+    cout << "Podaj wartosc x: ";
+    cin  >> wartX;
+
+    wartFunc = a*pow(wartX,2)+(b*wartX)+c;
+}
+
+void Trojmian::wyz_pierwiastki()
+{
+    wyz_delte();
 
     if (delta <  0)  liczba_pierwiastkow = '0';
     if (delta >  0)  liczba_pierwiastkow = '2';
@@ -67,6 +87,37 @@ float Trojmian::przetworz_dane()
     }
 }
 
+void Trojmian::przetworz_dane()
+{
+    cout << "Wybierz co chcesz dokonać:" << endl;
+    cout << "---------------------" << endl;
+    cout << "Wyznacz Pierwiastki 1" << endl;
+    cout << "Wyznacz Pierwiastki 2" << endl;
+    cout << "Wyznacz Pierwiastki 3" << endl;
+    cout << "---------------------" << endl;
+    cout << "Twoj wybór (domyślnie 1):";
+    cin  >> wybor;
+
+    switch (wybor)
+    {
+        case '1':
+            wyz_pierwiastki();
+        break;
+
+        case '2':
+            wyz_delte();
+        break;
+
+        case '3':
+            wyz_wartosc();
+        break;
+
+        default:
+            wyz_pierwiastki();
+        break;
+    }
+}
+
 void Trojmian::wyswietl_wynik()
 {
     cout << "Dla wprowadzonych liczb:" << endl;
@@ -74,20 +125,36 @@ void Trojmian::wyswietl_wynik()
     cout << "b = " << b << "." << endl;
     cout << "c = " << c << "." << endl;
 
-    switch(liczba_pierwiastkow)
+    switch(wybor)
     {
-        case '0':
-            cout << "brak pierwiastkow rzeczywistych." << endl;
-        break;
-
         case '1':
-            cout << "trojmian ma jeden pierwiastek podwojny x1 = " << x1 << endl;
+            if (liczba_pierwiastkow == '0') cout << "brak pierwiastkow rzeczywistych." << endl;
+            if (liczba_pierwiastkow == '1') cout << "trojmian ma jeden pierwiastek podwojny x1 = " << x1 << endl;
+            if (liczba_pierwiastkow == '2')
+            {
+                cout << "trojmian ma dwa pierwiastki:" << endl;
+                cout << "x1 = " << x1 << endl;
+                cout << "x2 = " << x2 << endl;
+            }
         break;
 
         case '2':
-            cout << "trojmian ma dwa pierwiastki:" << endl;
-            cout << "x1 = " << x1 << endl;
-            cout << "x2 = " << x2 << endl;
+            cout << "Delta wynosi: " << delta;
+        break;
+
+        case '3':
+            cout << "Wartośc funkcji dla F(" << wartX << ") = " << wartFunc;
+        break;
+
+        default:
+            if (liczba_pierwiastkow == '0') cout << "brak pierwiastkow rzeczywistych." << endl;
+            if (liczba_pierwiastkow == '1') cout << "trojmian ma jeden pierwiastek podwojny x1 = " << x1 << endl;
+            if (liczba_pierwiastkow == '2')
+            {
+                cout << "trojmian ma dwa pierwiastki:" << endl;
+                cout << "x1 = " << x1 << endl;
+                cout << "x2 = " << x2 << endl;
+            }
         break;
     }
 }
