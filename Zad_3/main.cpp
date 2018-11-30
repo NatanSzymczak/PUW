@@ -1,5 +1,5 @@
 /***************************************************************
- * Name:      Zad_3 (6.3)
+ * Name:      Zad_3 (6.3) _Przerobione_Ver1
  * File:      main.cpp
  * Purpose:   Code for school
  * Author:    Damian Michalak-Szmacińśki ()
@@ -21,24 +21,77 @@ class Matrix{
 public:
     void czytaj_dane(int macierz[rozmiar][rozmiar], int rozmiar);
     void przetworz_dane(int macierz[rozmiar][rozmiar], int rozmiar);
+    void suma_nizej_przek(int tablica[rozmiar][rozmiar], int rozmiar);
+    void suma_wyzej_przek(int tablica[rozmiar][rozmiar], int rozmiar);
+    void suma_elementow(int tablica[rozmiar][rozmiar], int rozmiar);
     void wyswietl_wynik(int macierz[rozmiar][rozmiar], int rozmiar);
 };
 
 void Matrix::czytaj_dane(int tablica[rozmiar][rozmiar], int rozmiar)
 {
-    int i,j;
-    //randomize(); //Orginalnie prawdopodobnie dla windows
+    int i,j,t =1;
 
+    //randomize(); //Orginalnie prawdopodobnie dla windows
     for (i = 0; i < rozmiar; i++)
     {
         for (j = 0; j < rozmiar; j++)
         {
-            if (i == j) //pseudo losowe liczby funkcja rand()
-                tablica[i][j] = rand() %10; // rand() %10 == random(10)
-            else
-                tablica[i][j] = 0;
+
+            if (i == j) tablica[i][j] = rand() %10; //warunek dla przekontnej
+            else tablica[i][j] = rand() %10; //pozostale // rand() %10 == random(10)
+
+            for (t=1; t < rozmiar; t++) // pętla i warunka dla poniżej przkatnej
+                if (i-t == j) tablica[i][j] = rand() %10;
+
+            for (t=1; t < rozmiar; t++) // pętla i warunka dla powyrzej przkatnej
+                if (i+t == j) tablica[i][j] = rand() %10;
+
         }
+
     }
+
+}
+
+void Matrix::suma_nizej_przek(int tablica[rozmiar][rozmiar], int rozmiar)
+{
+    int i, j, t, suma = 0;
+
+    for (i = 0; i < rozmiar; i++)
+        for (j = 0; j < rozmiar; j++)
+            for (t=1; t < rozmiar; t++)
+            {
+                if (i == j)     suma = suma;
+                if (i-t == j && i != j)   suma = suma+tablica[i][j];
+            }
+
+        cout << "Suma elementow nizej przekatnej wynosi: " << suma << endl;
+
+}
+
+void Matrix::suma_wyzej_przek(int tablica[rozmiar][rozmiar], int rozmiar)
+{
+    int i, j, t, suma = 0;
+
+    for (i = 0; i < rozmiar; i++)
+        for (j = 0; j < rozmiar; j++)
+            for (t=1; t < rozmiar; t++)
+                if (i+t == j && i !=j)
+                  suma = suma+tablica[i][j];
+
+        cout << "Suma elementow wyzej przekatnej wynosi: " << suma << endl;
+
+}
+
+void Matrix::suma_elementow(int tablica[rozmiar][rozmiar], int rozmiar)
+{
+    int i, j, t, suma = 0;
+
+    for (i = 0; i < rozmiar; i++)
+        for (j = 0; j < rozmiar; j++)
+                  suma = suma+tablica[i][j];
+
+        cout << "Suma wszystkich elementow wynosi: " << suma << endl;
+
 }
 
 void Matrix::przetworz_dane(int tablica[rozmiar][rozmiar], int rozmiar)
@@ -80,6 +133,13 @@ int main()
     obj.czytaj_dane(tablica,rozmiar);
     obj.przetworz_dane(tablica,rozmiar);
     obj.wyswietl_wynik(tablica,rozmiar);
+
+    cout << endl;
+
+    obj.suma_nizej_przek(tablica,rozmiar);
+    obj.suma_wyzej_przek(tablica,rozmiar);
+    obj.suma_elementow(tablica,rozmiar);
+
 
     getchar(); // getch();
     return 0;
