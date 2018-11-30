@@ -1,5 +1,5 @@
 /***************************************************************
- * Name:      Zad_1 (6.2)
+ * Name:      Zad_1 (6.2) _Przerobione_Ver1
  * File:      main.cpp
  * Purpose:   Code for school
  * Author:    Damian Michalak-Szmacińśki ()
