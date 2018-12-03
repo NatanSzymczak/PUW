@@ -92,8 +92,8 @@ void Trojmian::przetworz_dane()
     cout << "Wybierz co chcesz dokonać:" << endl;
     cout << "---------------------" << endl;
     cout << "Wyznacz Pierwiastki 1" << endl;
-    cout << "Wyznacz Pierwiastki 2" << endl;
-    cout << "Wyznacz Pierwiastki 3" << endl;
+    cout << "Wyznacz delte       2" << endl;
+    cout << "Wyznacz wartosc     3" << endl;
     cout << "---------------------" << endl;
     cout << "Twoj wybór (domyślnie 1):";
     cin  >> wybor;
@@ -159,6 +159,12 @@ void Trojmian::wyswietl_wynik()
     }
 }
 
+void czekaj_na_klawisz()
+{
+    cout << endl <<  "Nacisnij enter by zakonczyc: ";
+    cin.ignore();
+    cin.get();
+}
 
 int main()
 {
@@ -170,6 +176,6 @@ int main()
     obj.przetworz_dane();
     obj.wyswietl_wynik();
 
-    getchar(); // getch();
+    czekaj_na_klawisz(); // getch();
     return 0;
 }

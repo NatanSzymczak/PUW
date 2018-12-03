@@ -149,10 +149,17 @@ void oblicz_pole_dla_czworokata()
 
 }
 
+void czekaj_na_klawisz()
+{
+    cout << "Nacisnij enter by zakonczyc: ";
+    cin.ignore();
+    cin.get();
+}
+
 int main()
 {
     oblicz_pole_dla_czworokata();
 
-    getchar(); // getch();
+    czekaj_na_klawisz(); // getch();
     return 0;
 }

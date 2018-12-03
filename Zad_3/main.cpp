@@ -124,6 +124,11 @@ void Matrix::wyswietl_wynik(int tablica[rozmiar][rozmiar], int rozmiar)
     }
 }
 
+void czekaj_na_klawisz()
+{
+    cout << "Nacisnij enter by zakonczyc: ";
+    cin.ignore();
+}
 
 int main()
 {
@@ -141,6 +146,6 @@ int main()
     obj.suma_elementow(tablica,rozmiar);
 
 
-    getchar(); // getch();
+    czekaj_na_klawisz(); // getch();
     return 0;
 }
