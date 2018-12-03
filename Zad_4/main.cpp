@@ -11,16 +11,19 @@
 #include <iostream>
 #include <iomanip>
 #include <curses.h>//conio for windows//linux install lib:/rpm ncurses-devel ncurses/deb: libncurses5-dev libncursesw5-dev/
+#include <cmath>
 
 using namespace std;
 
-const int n = 6;
+const int n = 30; //ilosc elementow w tablicy
 int liczby[n];
 
 class Sortowanie{
 public:
     void czytaj_dane();
-    float przetworz_dane();
+    void babelkowe();
+    void quicksort(int [],int,int);
+    void przetworz_dane();
     void wyswietl_wynik();
 };
 
@@ -28,22 +31,17 @@ void Sortowanie::czytaj_dane()
 {
     int i;
 
-    liczby[0] =  574;
-    liczby[1] =  303;
-    liczby[2] = -134;
-    liczby[3] =  125;
-    liczby[4] =   80;
-    liczby[5] =  236;
 
     cout << "Liczby nieposortowane: " << endl;
     for (i = 0; i < n; i++)
     {
-      cout << liczby[i] << " ";
+        liczby[i] =  rand() %1000;
+        cout << liczby[i] << " ";
     }
     cout << endl;
 }
 
-float Sortowanie::przetworz_dane()
+void Sortowanie::babelkowe()
 {
     int i, j, x;
 
@@ -59,6 +57,70 @@ float Sortowanie::przetworz_dane()
         }
       }
     }
+
+    cout << endl << "Sortowanie Babelkowe" << endl;
+
+}
+
+void Sortowanie::quicksort( int liczby[], int left, int right )
+{
+    int i = left;
+    int j = right;
+    int x = liczby[( left + right ) / 2 ];
+
+    do
+    {
+        while( liczby[ i ] < x )
+             i++;
+
+        while( liczby[ j ] > x )
+             j--;
+
+        if( i <= j )
+        {
+            swap( liczby[ i ], liczby[ j ] );
+
+            i++;
+            j--;
+        }
+    } while( i <= j );
+
+    if( left < j ) quicksort( liczby, left, j );
+
+    if( right > i ) quicksort( liczby, i, right );
+
+    if(i==1)
+        cout << endl << "Sortowanie Szybkie" << endl;
+
+}
+
+void Sortowanie::przetworz_dane()
+{
+    char wybor = ' ';
+
+    cout << "Dokonaj wyboru rodzaju algorytmu sortowania: " << endl;
+    cout << "Babelkowe 1" << endl;
+    cout << "quicksort 2" << endl;
+    cout << "Twoj wybor: ";
+    cin  >> wybor;
+
+    switch (wybor)
+    {
+        case '1':
+            babelkowe();
+        break;
+
+        case '2':
+            quicksort(liczby,0,n);
+        break;
+
+        default:
+            babelkowe();
+        break;
+
+    }
+
+    cout << "-----------------------------------------------" << endl;
 }
 
 void Sortowanie::wyswietl_wynik()
@@ -75,6 +137,12 @@ void Sortowanie::wyswietl_wynik()
     cout << endl;
 }
 
+void czekaj_na_klawisz()
+{
+    cout << "Nacisnij enter by zakonczyc: ";
+    cin.ignore();
+    cin.get();
+}
 
 int main()
 {
@@ -84,6 +152,7 @@ int main()
     obj.przetworz_dane();
     obj.wyswietl_wynik();
 
-    getchar(); // getch();
+    czekaj_na_klawisz();
+
     return 0;
 }
